@@ -244,14 +244,6 @@ Dockerfile · docker-compose.yml · .github/workflows/ci.yml
 
 ---
 
-## Roadmap
-
-- [ ] Real sentence embeddings (SentenceTransformers + FAISS) to close the out-of-scope abstention gap
-- [ ] General evidence-fact-lookup capability across arbitrary evidence types
-- [ ] Broader SEC ticker and CISA question coverage
-- [ ] Grow the evaluation benchmark toward 75-150 cases
-- [ ] Real OAuth/SSO in place of the mock auth layer
-
 ## License
 
 [MIT](LICENSE) — use it, fork it, learn from it.
