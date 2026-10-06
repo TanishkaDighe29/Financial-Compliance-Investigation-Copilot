@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Environment / secrets
+.env
+.env.local
+
+# Runtime data -- generated locally, not committed
+data/db/*.db
+data/processed/chunks/*.jsonl
+data/processed/faiss_index/
+data/raw/sec_edgar/filings_html/*.html
+data/raw/sec_edgar/filings_metadata/*_submissions.json
+data/evaluation/results.json
+
+# OS / editor cruft
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,38 @@
+# One-command setup: `docker compose up --build`
+# API + dashboard both come up on http://localhost:8000 (dashboard at /ui).
+#
+# Optional local LLM (Ollama): the `ollama` service below is commented out
+# by default -- this project works fully without it (see README's "Enabling
+# the local LLM" section). Uncomment both the `ollama` service and the
+# `depends_on`/environment lines on `api` if you want it, then also flip
+# get_llm_client() in backend/app/copilot/llm_client.py to OllamaClient().
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist the SQLite DB (investigations/findings/audit trail) across
+      # container restarts and rebuilds.
+      - compliance_db:/app/data/db
+    environment:
+      - PYTHONUNBUFFERED=1
+    # depends_on:
+    #   - ollama
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_models:/root/.ollama
+
+volumes:
+  compliance_db:
+  # ollama_models:

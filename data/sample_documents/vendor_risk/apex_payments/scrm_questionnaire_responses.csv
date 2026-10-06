@@ -1,0 +1,17 @@
+# Synthetic sample created solely for portfolio demonstration. This document contains no real vendor, client, employee, or confidential data.
+vendor,question_id,category,subcategory,question_text,answer,notes
+Apex Payments LLC (fictional),2.2,Supply Chain Management and Supplier Governance,ICT Supply Chain Management,Do you have a documented Quality Management System for your ICT supply chain operation based on an industry standard or framework?,Yes,
+Apex Payments LLC (fictional),2.5,Supply Chain Management and Supplier Governance,Authentication and Provenance,Do you provide a bill of materials (BOM) for your products/services covering all logic-bearing hardware/firmware/software?,Yes,
+Apex Payments LLC (fictional),2.8,Supply Chain Management and Supplier Governance,Supplier Governance,Do you have written SCRM requirements in your contracts with your own suppliers?,Yes,
+Apex Payments LLC (fictional),3.16,Secure Design and Engineering,Respond to Vulnerabilities,Do you maintain and manage a Product Security Incident Reporting and Response program?,Yes,
+Apex Payments LLC (fictional),4.1,Information Security,General,Do you hold a valid information security/cybersecurity third-party attestation or certification (e.g. ISO 27001 SOC 2 Type II)?,No,"Certification lapsed; SOC 2 Type II renewal in progress, not yet issued."
+Apex Payments LLC (fictional),4.15,Information Security,Protect,Do you have network access control policies aligned with industry standards,Yes,
+Apex Payments LLC (fictional),4.21,Information Security,Detect,Do you have defined and documented incident detection practices with centrally logged and continuously monitored cybersecurity events?,Yes,
+Apex Payments LLC (fictional),4.25,Information Security,Respond and Recover,Do you have a documented incident response process and a dedicated incident response team (CSIRT)?,Alternate,Incident response handled by parent company's shared CSIRT; no dedicated team.
+Apex Payments LLC (fictional),5.2,Physical Security,General,Do you have documented security policies controlling physical access to cyber assets (network devices,Yes,
+Apex Payments LLC (fictional),6.3,Personnel Security,Onboarding,Do you have policies for conducting background checks of your employees where permitted by local law?,Yes,
+Apex Payments LLC (fictional),6.9,Personnel Security,Awareness and Training,Are personnel required to complete formal SCRM training annually?,Yes,
+Apex Payments LLC (fictional),7.1,Supply Chain Integrity,General,Do your product integrity processes conform to a recognized standard (e.g. ISO 27036 SAE AS6171)?,Yes,
+Apex Payments LLC (fictional),7.4,Supply Chain Integrity,General,Do you have processes to independently detect anomalous behavior and defects in your products or services?,Yes,
+Apex Payments LLC (fictional),8.3,Supply Chain Resilience,Business Continuity,Do you maintain a formal business continuity plan to sustain operations through disruptions or significant staff loss?,No,No formal business continuity plan on file.
+Apex Payments LLC (fictional),8.6,Supply Chain Resilience,Diversity of Supply Base,Does your company consider supplier diversity to avoid single points of failure in your own supply chain?,Yes,

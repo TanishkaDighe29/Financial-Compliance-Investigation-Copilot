@@ -1,0 +1,19 @@
+# Synthetic sample created solely for portfolio demonstration. This document contains no real company, client, employee, customer, vendor, financial, security, or confidential data.
+review_id,review_quarter,application,user_id,user_name,access_role,privilege_level,manager,reviewer,review_date,decision,approval_status,approval_date,evidence_status
+PAR-2025-Q1-001,2025-Q1,CoreBanking,U1002,Ana Morgan,DB Admin,Privileged,Mei Lee,IAM Lead,2025-03-28,Retain,Approved,2025-03-28,Complete
+PAR-2025-Q1-002,2025-Q1,CoreBanking,U1003,Omar Nguyen,System Admin,Privileged,Ana Kim,Security Manager,2025-03-28,Retain,Approved,2025-03-28,Complete
+PAR-2025-Q1-003,2025-Q1,TreasuryOps,U1004,Ana Ivanov,DB Admin,Privileged,Lena Nguyen,Security Manager,2025-03-24,Revoke,Approved,2025-03-24,Complete
+PAR-2025-Q1-004,2025-Q1,CoreBanking,U1005,Jordan Nguyen,Support Admin,Privileged,Alex Lee,Security Manager,2025-03-21,Revoke,Approved,2025-03-21,Complete
+PAR-2025-Q1-005,2025-Q1,CoreBanking,U1006,Priya Kim,Support Admin,Privileged,Raj Brown,Application Owner,2025-03-27,Retain,Approved,2025-03-27,Complete
+PAR-2025-Q1-006,2025-Q1,TreasuryOps,U1007,David Nguyen,System Admin,Privileged,Lena Morgan,IAM Lead,2025-03-23,Revoke,Approved,2025-03-23,Complete
+PAR-2025-Q1-007,2025-Q1,CoreBanking,U1008,Ana Chen,Support Admin,Privileged,David Chen,Security Manager,2025-03-24,Revoke,Approved,2025-03-24,Complete
+PAR-2025-Q1-008,2025-Q1,BIPlatform,U1009,Raj Lee,Support Admin,Privileged,Raj Chen,IAM Lead,2025-03-21,Revoke,Approved,2025-03-21,Complete
+PAR-2025-Q1-009,2025-Q1,TreasuryOps,U1010,Jordan Ivanov,DB Admin,Privileged,Jordan Garcia,Application Owner,2025-03-28,Revoke,Approved,2025-03-28,Complete
+PAR-2025-Q1-010,2025-Q1,PaymentsHub,U1011,Raj Patel,DB Admin,Privileged,Ana Shah,Application Owner,2025-03-21,Revoke,Approved,2025-03-21,Complete
+PAR-2025-Q1-011,2025-Q1,PaymentsHub,U1012,Omar Shah,DB Admin,Privileged,Sam Nguyen,IAM Lead,2025-03-22,Revoke,Approved,2025-03-22,Complete
+PAR-2025-Q1-012,2025-Q1,CustomerPortal,U1013,Jordan Chen,Support Admin,Privileged,Sam Kim,Security Manager,2025-03-22,Retain,Approved,2025-03-22,Complete
+PAR-2025-Q1-013,2025-Q1,PaymentsHub,U1014,Priya Brown,System Admin,Privileged,Priya Nguyen,IAM Lead,2025-03-28,Revoke,Approved,2025-03-28,Complete
+PAR-2025-Q1-014,2025-Q1,CustomerPortal,U1015,Lena Patel,System Admin,Privileged,Raj Kim,Application Owner,2025-03-22,Revoke,Approved,2025-03-22,Complete
+PAR-2025-Q1-015,2025-Q1,BIPlatform,U1016,Lena Lee,System Admin,Privileged,Alex Ivanov,IAM Lead,2025-03-22,Retain,Approved,2025-03-22,Complete
+PAR-2025-Q1-016,2025-Q1,CustomerPortal,U1017,Sam Patel,System Admin,Privileged,Raj Morgan,Security Manager,2025-03-23,Retain,Approved,2025-03-23,Complete
+PAR-2025-Q1-017,2025-Q1,TreasuryOps,U1018,David Kim,Security Engineer,Privileged,David Ivanov,Security Manager,2025-03-27,Retain,Approved,2025-03-27,Complete

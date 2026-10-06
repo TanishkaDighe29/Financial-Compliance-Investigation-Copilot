@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build NIST controls subset
+        run: python3 scripts/import_nist_controls.py
+
+      - name: Generate synthetic access-control evidence
+        run: python3 scripts/generate_synthetic_evidence.py
+
+      - name: Generate synthetic vendor SCRM responses
+        run: python3 scripts/generate_vendor_responses.py
+
+      - name: Build retrieval chunk index
+        run: python3 backend/app/ingestion/parsers.py
+
+      # Blocking: the unit/integration test suite must pass.
+      - name: Run tests
+        run: python3 -m pytest backend/tests/ -v
+
+      # Informational, not blocking: the evaluation benchmark tracks system
+      # QUALITY (retrieval accuracy, abstention behavior), which is expected
+      # to improve incrementally, not a pass/fail gate like the test suite.
+      # See README's "Evaluation results" section for the current honest
+      # score and why the two known gaps aren't quick fixes.
+      - name: Run evaluation benchmark (informational)
+        continue-on-error: true
+        run: python3 -m backend.app.evaluation.run_evaluation --verbose
+
+      - name: Upload evaluation results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-results
+          path: data/evaluation/results.json
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t financial-compliance-copilot:ci .
+
+      - name: Smoke-test the container
+        run: |
+          docker run -d -p 8000:8000 --name copilot-ci financial-compliance-copilot:ci
+          for i in $(seq 1 15); do
+            if curl -sf http://localhost:8000/ > /dev/null; then echo "API is up"; break; fi
+            sleep 2
+          done
+          curl -sf http://localhost:8000/ | grep -q '"status":"ok"'
+          curl -sf http://localhost:8000/ui/ | grep -q '<title>'
+          docker logs copilot-ci
+          docker stop copilot-ci

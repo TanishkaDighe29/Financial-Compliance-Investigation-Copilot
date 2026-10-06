@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+rank-bm25
+scikit-learn
+sqlalchemy
+pytest
+httpx
+beautifulsoup4

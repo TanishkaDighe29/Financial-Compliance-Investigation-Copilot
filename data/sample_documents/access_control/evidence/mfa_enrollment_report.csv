@@ -1,0 +1,22 @@
+# Synthetic sample created solely for portfolio demonstration. This document contains no real company, client, employee, customer, vendor, financial, security, or confidential data.
+user_id,application,mfa_enrolled,exception_granted,exception_expiration,exception_status
+U3000,CoreBanking,true,false,,
+U3001,PaymentsHub,true,false,,
+U3002,CoreBanking,true,false,,
+U3003,BIPlatform,false,true,2025-06-30,Active
+U3004,BIPlatform,false,true,2025-06-30,Active
+U3005,PaymentsHub,true,false,,
+U3006,BIPlatform,true,false,,
+U3007,TreasuryOps,true,false,,
+U3008,CustomerPortal,true,false,,
+U3009,CustomerPortal,true,false,,
+U3010,PaymentsHub,true,false,,
+U3011,BIPlatform,true,false,,
+U3012,TreasuryOps,true,false,,
+U3013,CoreBanking,true,false,,
+U3014,CustomerPortal,true,false,,
+U3015,CustomerPortal,true,false,,
+U3016,BIPlatform,true,false,,
+U3017,BIPlatform,true,false,,
+U3018,BIPlatform,true,false,,
+U3019,TreasuryOps,true,false,,

@@ -1,0 +1,18 @@
+# Synthetic sample created solely for portfolio demonstration. This document contains no real company, client, employee, customer, vendor, financial, security, or confidential data.
+review_id,review_quarter,application,user_id,user_name,access_role,privilege_level,manager,reviewer,review_date,decision,approval_status,approval_date,evidence_status
+PAR-2025-Q2-018,2025-Q2,PaymentsHub,U1019,Mei Ivanov,DB Admin,Privileged,Alex Nguyen,IAM Lead,2025-06-27,Revoke,Approved,2025-06-27,Complete
+PAR-2025-Q2-019,2025-Q2,TreasuryOps,U1020,Mei Chen,System Admin,Privileged,Omar Ivanov,Security Manager,2025-06-20,Retain,Approved,2025-06-20,Complete
+PAR-2025-Q2-020,2025-Q2,CoreBanking,U1021,David Patel,Support Admin,Privileged,Mei Morgan,IAM Lead,2025-06-23,Revoke,Approved,2025-06-23,Complete
+PAR-2025-Q2-021,2025-Q2,TreasuryOps,U1022,Jordan Brown,Security Engineer,Privileged,Mei Garcia,Application Owner,2025-06-21,Retain,Approved,2025-06-21,Complete
+PAR-2025-Q2-022,2025-Q2,CoreBanking,U1023,Priya Shah,Security Engineer,Privileged,Priya Garcia,IAM Lead,2025-06-21,Retain,Approved,2025-06-21,Complete
+PAR-2025-Q2-023,2025-Q2,CoreBanking,U1024,Lena Garcia,DB Admin,Privileged,Priya Lee,Application Owner,2025-06-23,Revoke,Approved,2025-06-23,Complete
+PAR-2025-Q2-024,2025-Q2,CoreBanking,U1025,Sam Ivanov,System Admin,Privileged,Sam Chen,Application Owner,2025-06-22,Retain,Approved,2025-06-22,Complete
+PAR-2025-Q2-025,2025-Q2,BIPlatform,U1026,Ana Nguyen,Support Admin,Privileged,Sam Morgan,Application Owner,2025-06-22,Revoke,Approved,2025-06-22,Complete
+PAR-2025-Q2-026,2025-Q2,PaymentsHub,U1027,Alex Chen,System Admin,Privileged,Ana Patel,IAM Lead,2025-06-28,Revoke,Approved,2025-06-28,Complete
+PAR-2025-Q2-027,2025-Q2,TreasuryOps,U1028,Jordan Patel,System Admin,Privileged,Jordan Kim,IAM Lead,2025-06-23,Retain,Approved,2025-06-23,Complete
+PAR-2025-Q2-028,2025-Q2,BIPlatform,U1029,David Brown,DB Admin,Privileged,Omar Brown,Security Manager,2025-06-26,Retain,Approved,2025-06-26,Complete
+PAR-2025-Q2-029,2025-Q2,TreasuryOps,U1030,Mei Shah,DB Admin,Privileged,Jordan Morgan,Application Owner,2025-06-21,Revoke,Approved,2025-06-21,Complete
+PAR-2025-Q2-030,2025-Q2,CoreBanking,U1031,Sam Brown,System Admin,Privileged,Alex Brown,IAM Lead,2025-06-28,Retain,Approved,2025-06-28,Complete
+PAR-2025-Q2-031,2025-Q2,CustomerPortal,U1032,David Lee,Support Admin,Privileged,Alex Morgan,IAM Lead,2025-06-25,Retain,Approved,2025-06-25,Complete
+PAR-2025-Q2-032,2025-Q2,PaymentsHub,U1033,Priya Morgan,System Admin,Privileged,Alex Shah,Security Manager,2025-06-23,Revoke,Approved,2025-06-23,Complete
+PAR-2025-Q2-033,2025-Q2,PaymentsHub,U1034,David Shah,Security Engineer,Privileged,Omar Lee,Security Manager,2025-06-22,Retain,Approved,2025-06-22,Complete

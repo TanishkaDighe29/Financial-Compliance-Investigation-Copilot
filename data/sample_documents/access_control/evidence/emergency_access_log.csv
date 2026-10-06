@@ -1,0 +1,4 @@
+# Synthetic sample created solely for portfolio demonstration. This document contains no real company, client, employee, customer, vendor, financial, security, or confidential data.
+event_id,application,user_id,requested_at,approved_by,post_use_review,review_date
+EMG-001,CoreBanking,U1010,2025-04-02T02:15:00,IAM Manager,Completed,2025-04-03
+EMG-002,PaymentsHub,U1022,2025-07-19T23:40:00,Security Manager,Missing,

@@ -1,0 +1,17 @@
+# Synthetic sample created solely for portfolio demonstration. This document contains no real company, client, employee, customer, vendor, financial, security, or confidential data.
+review_id,review_quarter,application,user_id,user_name,access_role,privilege_level,manager,reviewer,review_date,decision,approval_status,approval_date,evidence_status
+PAR-2025-Q3-034,2025-Q3,CoreBanking,U1035,Jordan Shah,Security Engineer,Privileged,Priya Patel,Application Owner,2025-09-27,Retain,Pending,,Partial
+PAR-2025-Q3-035,2025-Q3,PaymentsHub,U1036,Alex Kim,Support Admin,Privileged,Raj Ivanov,Application Owner,2025-09-20,Revoke,Approved,2025-09-20,Complete
+PAR-2025-Q3-036,2025-Q3,CoreBanking,U1037,Omar Morgan,System Admin,Privileged,Raj Nguyen,IAM Lead,2025-09-26,Retain,Approved,2025-09-26,Complete
+PAR-2025-Q3-037,2025-Q3,TreasuryOps,U1038,Lena Chen,Support Admin,Privileged,Priya Ivanov,Security Manager,2025-09-24,Revoke,Approved,2025-09-24,Complete
+PAR-2025-Q3-038,2025-Q3,PaymentsHub,U1039,Sam Garcia,Security Engineer,Privileged,Sam Lee,IAM Lead,2025-09-24,Retain,Approved,2025-09-24,Complete
+PAR-2025-Q3-039,2025-Q3,TreasuryOps,U1040,Omar Kim,Security Engineer,Privileged,Mei Nguyen,Application Owner,2025-09-23,Revoke,Approved,2025-09-23,Complete
+PAR-2025-Q3-040,2025-Q3,PaymentsHub,U1041,Priya Chen,DB Admin,Privileged,Mei Kim,Application Owner,2025-09-27,Retain,Approved,2025-09-27,Complete
+PAR-2025-Q3-041,2025-Q3,TreasuryOps,U1042,Lena Brown,Support Admin,Privileged,Omar Patel,IAM Lead,2025-09-27,Revoke,Approved,2025-09-27,Complete
+PAR-2025-Q3-042,2025-Q3,CoreBanking,U1043,Lena Ivanov,DB Admin,Privileged,Raj Shah,Application Owner,2025-09-26,Revoke,Approved,2025-09-26,Complete
+PAR-2025-Q3-043,2025-Q3,CustomerPortal,U1044,David Garcia,System Admin,Privileged,Mei Patel,IAM Lead,2025-09-23,Retain,Approved,2025-09-23,Complete
+PAR-2025-Q3-044,2025-Q3,PaymentsHub,U1045,Omar Chen,Security Engineer,Privileged,Lena Shah,Security Manager,2025-09-27,Revoke,Approved,2025-09-27,Complete
+PAR-2025-Q3-045,2025-Q3,CoreBanking,U1046,Alex Garcia,DB Admin,Privileged,Sam Shah,Security Manager,2025-09-23,Revoke,Approved,2025-09-23,Complete
+PAR-2025-Q3-046,2025-Q3,CustomerPortal,U1047,Raj Garcia,Support Admin,Privileged,Ana Lee,Security Manager,2025-09-21,Revoke,Approved,2025-09-21,Complete
+PAR-2025-Q3-047,2025-Q3,PaymentsHub,U1048,Alex Patel,System Admin,Privileged,Mei Brown,IAM Lead,2025-09-24,Retain,Approved,2025-09-24,Complete
+PAR-2025-Q3-048,2025-Q3,TreasuryOps,U1049,Ana Garcia,System Admin,Privileged,Omar Garcia,IAM Lead,2025-09-20,Revoke,Approved,2025-09-20,Complete

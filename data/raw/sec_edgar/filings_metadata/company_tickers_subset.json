@@ -1,0 +1,11 @@
+{
+  "note": "Subset of the real SEC EDGAR company_tickers.json (https://www.sec.gov/files/company_tickers.json), selected for sector diversity per the project's SEC filing risk intelligence module.",
+  "companies": [
+    {"ticker": "JPM", "title": "JPMORGAN CHASE & CO", "cik": 19617, "sector": "Banking / financial services"},
+    {"ticker": "WFC", "title": "WELLS FARGO & COMPANY/MN", "cik": 72971, "sector": "Banking / financial services"},
+    {"ticker": "V", "title": "VISA INC.", "cik": 1403161, "sector": "Payments / fintech"},
+    {"ticker": "MA", "title": "Mastercard Inc", "cik": 1141391, "sector": "Payments / fintech"},
+    {"ticker": "COIN", "title": "Coinbase Global, Inc.", "cik": 1679788, "sector": "Fintech / crypto"},
+    {"ticker": "CRWD", "title": "CrowdStrike Holdings, Inc.", "cik": 1535527, "sector": "Cloud / cybersecurity software"}
+  ]
+}

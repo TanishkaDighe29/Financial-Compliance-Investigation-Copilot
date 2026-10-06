@@ -1,0 +1,17 @@
+# Synthetic sample created solely for portfolio demonstration. This document contains no real company, client, employee, customer, vendor, financial, security, or confidential data.
+employee_id,employee_name,department,termination_date,application,account_id,account_disabled_at,hours_to_disable,within_24_hours,exception_id
+E2000,Raj Brown,Operations,2025-07-27,CoreBanking,U2000,,17,true,
+E2001,Priya Nguyen,Engineering,2025-04-06,PaymentsHub,U2001,,20,true,
+E2002,Priya Garcia,Risk,2025-05-06,CoreBanking,U2002,,50,false,EXC-2025-014
+E2003,Sam Brown,Risk,2025-03-17,PaymentsHub,U2003,,20,true,
+E2004,Alex Shah,Risk,2025-06-10,CustomerPortal,U2004,,15,true,
+E2005,Omar Ivanov,Risk,2025-04-27,CustomerPortal,U2005,,11,true,
+E2006,Alex Morgan,Engineering,2025-02-03,CustomerPortal,U2006,,11,true,
+E2007,Mei Patel,Engineering,2025-07-10,BIPlatform,U2007,,16,true,
+E2008,Raj Brown,Finance,2025-11-13,CustomerPortal,U2008,,11,true,
+E2009,Jordan Brown,Risk,2025-06-01,CustomerPortal,U2009,,16,true,
+E2010,Jordan Kim,Engineering,2025-08-24,TreasuryOps,U2010,,11,true,
+E2011,Omar Brown,Risk,2025-07-05,PaymentsHub,U2011,,3,true,
+E2012,Omar Lee,Operations,2025-09-05,PaymentsHub,U2012,,15,true,
+E2013,Omar Garcia,Engineering,2025-12-06,BIPlatform,U2013,,16,true,
+E2014,Mei Ivanov,Engineering,2025-04-26,CustomerPortal,U2014,,17,true,

@@ -1,0 +1,12 @@
+# Real, sourced facts extracted from actual SEC EDGAR 10-K filings (verified live 2026-09-14).
+# Figures and dates are factual data, not copyrighted expression -- paraphrased narrative
+# fields describe what the filing says without reproducing its wording. Full text is not
+# stored here; run scripts/download_sec_filings.py to fetch live filings yourself.
+ticker,fiscal_year,signal_type,value,narrative,source_url
+CRWD,FY2022,net_loss_usd,234800000,"Net loss for fiscal year ended 2022-01-31, per Item 7 MD&A",https://www.sec.gov/Archives/edgar/data/1535527/000153552722000006/crwd-20220131.htm
+CRWD,FY2022,accumulated_deficit_usd,964900000,"Accumulated deficit as of 2022-01-31",https://www.sec.gov/Archives/edgar/data/1535527/000153552722000006/crwd-20220131.htm
+CRWD,FY2022,headcount,4965,"Full-time employees as of 2022-01-31",https://www.sec.gov/Archives/edgar/data/1535527/000153552722000006/crwd-20220131.htm
+CRWD,FY2025,total_revenue_usd,3953600000,"Total revenue, fiscal year ended 2025-01-31, up 29% YoY",https://www.sec.gov/Archives/edgar/data/1535527/000153552725000009/crwd-20250131.htm
+CRWD,FY2025,net_loss_usd,16600000,"Net loss for fiscal year ended 2025-01-31",https://www.sec.gov/Archives/edgar/data/1535527/000153552725000009/crwd-20250131.htm
+CRWD,FY2026,material_incident,1,"FY2026 10-K discloses the July 19 2024 Falcon sensor content-update defect that caused widespread Windows system crashes, with continuing adverse effects on business/reputation/financial condition disclosed as an ongoing risk factor",https://last10k.com/sec-filings/crwd/0001535527-25-000009.htm
+CRWD,FY2026,net_loss_usd,162500000,"Net loss for fiscal year ended 2026-01-31, per third-party summary of the FY2026 10-K (verify against the primary filing before use)",https://gloom.sh/stocks/crwd/risk-factors/2026

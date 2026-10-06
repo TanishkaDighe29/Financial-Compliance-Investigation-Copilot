@@ -1,0 +1,15 @@
+# Synthetic sample created solely for portfolio demonstration. This document contains no real company, client, employee, customer, vendor, financial, security, or confidential data.
+review_id,review_quarter,application,user_id,user_name,access_role,privilege_level,manager,reviewer,review_date,decision,approval_status,approval_date,evidence_status
+PAR-2025-Q4-049,2025-Q4,CustomerPortal,U1050,Ana Brown,DB Admin,Privileged,David Morgan,Application Owner,,,,,Missing
+PAR-2025-Q4-050,2025-Q4,CustomerPortal,U1051,Jordan Lee,System Admin,Privileged,Jordan Brown,Application Owner,,,,,Missing
+PAR-2025-Q4-051,2025-Q4,CustomerPortal,U1052,Lena Kim,DB Admin,Privileged,Jordan Garcia,Security Manager,,,,,Missing
+PAR-2025-Q4-052,2025-Q4,CustomerPortal,U1053,Raj Kim,Security Engineer,Privileged,David Ivanov,IAM Lead,,,,,Missing
+PAR-2025-Q4-053,2025-Q4,CustomerPortal,U1054,Sam Lee,Support Admin,Privileged,Raj Kim,IAM Lead,,,,,Missing
+PAR-2025-Q4-054,2025-Q4,TreasuryOps,U1055,Sam Chen,Security Engineer,Privileged,Jordan Ivanov,Application Owner,,,,,Missing
+PAR-2025-Q4-055,2025-Q4,BIPlatform,U1056,Omar Kim,DB Admin,Privileged,David Nguyen,IAM Lead,,,,,Missing
+PAR-2025-Q4-056,2025-Q4,PaymentsHub,U1057,Jordan Shah,System Admin,Privileged,Jordan Shah,Application Owner,,,,,Missing
+PAR-2025-Q4-057,2025-Q4,PaymentsHub,U1058,David Ivanov,DB Admin,Privileged,Priya Garcia,IAM Lead,,,,,Missing
+PAR-2025-Q4-058,2025-Q4,PaymentsHub,U1059,Mei Kim,System Admin,Privileged,Jordan Kim,Application Owner,,,,,Missing
+PAR-2025-Q4-059,2025-Q4,CoreBanking,U1060,Sam Kim,DB Admin,Privileged,Alex Shah,Application Owner,,,,,Missing
+PAR-2025-Q4-060,2025-Q4,TreasuryOps,U1061,David Shah,Support Admin,Privileged,Sam Ivanov,Application Owner,,,,,Missing
+PAR-2025-Q4-061,2025-Q4,TreasuryOps,U1062,Alex Garcia,Support Admin,Privileged,Mei Lee,Security Manager,,,,,Missing

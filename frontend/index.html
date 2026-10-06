@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Compliance Investigation Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* --- Core palette (Black / Rich Mahogany / Dark Walnut / Chocolate Brown / Bronze Spice) --- */
+    --black:#000000;
+    --mahogany:#2F1000;
+    --walnut:#621B00;
+    --chocolate:#945600;
+    --bronze:#C75000;
+
+    /* Derived tints -- same warm family, only lightness/opacity shifts, never a new hue */
+    --ivory:#F3E7D6;
+    --parchment:#D9C4AC;
+    --taupe:#9C8064;
+    --hairline:rgba(199,80,0,.22);
+    --hairline-soft:rgba(199,80,0,.12);
+    --surface-0:var(--black);
+    --surface-1:#160900;
+    --surface-2:var(--mahogany);
+    --surface-3:#3D1600;
+
+    --risk-high-bg:rgba(199,80,0,.16); --risk-high-fg:#E8813C; --risk-high-line:rgba(199,80,0,.55);
+    --risk-medium-bg:rgba(148,86,0,.20); --risk-medium-fg:#D9A24B; --risk-medium-line:rgba(148,86,0,.55);
+    --risk-low-bg:rgba(98,27,0,.16); --risk-low-fg:var(--parchment); --risk-low-line:var(--hairline);
+
+    --accepted:#D9A24B; --rejected:#E8813C; --pending:var(--parchment); --needs-more:var(--taupe);
+    --ok-dot:#D9A24B; --err-dot:#E8813C;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:
+      radial-gradient(1100px 620px at 12% -10%, rgba(199,80,0,.10), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(148,86,0,.08), transparent 55%),
+      var(--surface-1);
+    color:var(--ivory);
+    font-family:'Inter',system-ui,sans-serif; font-size:14px; line-height:1.55;
+  }
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif; font-weight:600; margin:0; color:var(--ivory)}
+  .mono{font-family:'IBM Plex Mono',monospace; letter-spacing:.01em}
+  a{color:inherit}
+  ::selection{background:var(--bronze); color:var(--black)}
+
+  .shell{display:grid; grid-template-columns:310px 1fr; min-height:100vh}
+  @media (max-width:860px){.shell{grid-template-columns:1fr}}
+
+  .rail{
+    background:linear-gradient(180deg, var(--surface-0) 0%, #0C0500 100%);
+    border-right:1px solid var(--hairline-soft);
+    color:var(--parchment); padding:32px 24px;
+    display:flex; flex-direction:column; gap:24px;
+  }
+  .brand{display:flex; align-items:center; gap:12px}
+  .brand svg{flex-shrink:0}
+  .rail h1{font-size:20px; letter-spacing:.2px; line-height:1.2}
+  .rail h1 .accent{color:var(--bronze); font-style:italic}
+  .rail .kicker{
+    font-size:11px; color:var(--taupe); margin-top:4px; text-transform:uppercase;
+    letter-spacing:.12em; font-weight:500;
+  }
+
+  .field{display:flex; flex-direction:column; gap:6px; margin-bottom:14px}
+  .field label{
+    font-size:11px; color:var(--taupe); text-transform:uppercase; letter-spacing:.09em; font-weight:500;
+  }
+  .field .hint{font-size:11px; color:var(--taupe); margin-top:-2px}
+  select, input, textarea{
+    background:#1A0B00; border:1px solid var(--hairline); color:var(--ivory);
+    padding:9px 11px; border-radius:3px; font:inherit; font-size:13px; width:100%;
+  }
+  select:focus, input:focus, textarea:focus{
+    outline:none; border-color:var(--bronze); box-shadow:0 0 0 3px rgba(199,80,0,.15);
+  }
+  textarea{resize:vertical; min-height:64px}
+
+  button{
+    font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+    border-radius:3px; border:1px solid transparent; padding:10px 16px;
+    transition:filter .15s ease, transform .05s ease;
+  }
+  button:active{transform:translateY(1px)}
+  .btn-primary{
+    background:linear-gradient(135deg, var(--bronze), var(--chocolate));
+    color:var(--black); border-color:transparent;
+    box-shadow:0 4px 18px rgba(199,80,0,.28);
+  }
+  .btn-primary:hover{filter:brightness(1.1)}
+  .btn-ghost{background:transparent; color:var(--parchment); border-color:var(--hairline)}
+  .btn-ghost:hover{border-color:var(--bronze); color:var(--ivory)}
+  .btn-row{display:flex; gap:10px; flex-wrap:wrap}
+  .btn-accept{background:rgba(217,162,75,.12); color:var(--accepted); border-color:rgba(217,162,75,.5)}
+  .btn-accept:hover{background:rgba(217,162,75,.2)}
+  .btn-reject{background:rgba(232,129,60,.12); color:var(--rejected); border-color:rgba(232,129,60,.5)}
+  .btn-reject:hover{background:rgba(232,129,60,.2)}
+  .btn-more{background:rgba(148,86,0,.18); color:var(--risk-medium-fg); border-color:rgba(148,86,0,.5)}
+  .btn-more:hover{background:rgba(148,86,0,.28)}
+
+  .rail-section{border-top:1px solid var(--hairline-soft); padding-top:20px}
+  .rail-note{font-size:12px; color:var(--taupe); line-height:1.6}
+  .rail-note code{color:var(--parchment); font-family:'IBM Plex Mono',monospace; font-size:11px}
+
+  /* Module tabs -- choose which investigation type to create */
+  .module-tabs{display:flex; gap:4px; margin-bottom:16px; background:#0C0500; border:1px solid var(--hairline-soft); border-radius:4px; padding:3px}
+  .module-tab{
+    flex:1; text-align:center; padding:8px 4px; font-size:11px; font-weight:600;
+    border-radius:3px; cursor:pointer; color:var(--taupe); transition:all .15s ease;
+    letter-spacing:.01em;
+  }
+  .module-tab:hover{color:var(--parchment)}
+  .module-tab.active{background:var(--bronze); color:var(--black)}
+  .module-form{display:none}
+  .module-form.active{display:block}
+
+  /* Connection status dot */
+  .status-dot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:7px; vertical-align:1px}
+  .status-dot.ok{background:var(--ok-dot); box-shadow:0 0 6px var(--ok-dot)}
+  .status-dot.err{background:var(--err-dot); box-shadow:0 0 6px var(--err-dot)}
+  .status-dot.loading{background:var(--taupe)}
+  .conn-label{font-size:11px; color:var(--taupe)}
+
+  .main{padding:40px 44px; max-width:1180px}
+  .main-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; flex-wrap:wrap; gap:8px}
+  .main-head h2{font-size:28px}
+  .subhead{color:var(--taupe); font-size:13px; margin-bottom:24px; display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+
+  /* Stat cards */
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:26px}
+  @media (max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat-card{
+    border:1px solid var(--hairline); background:var(--surface-2); border-radius:6px;
+    padding:16px 18px; box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+  }
+  .stat-card .n{font-family:'Playfair Display',serif; font-size:26px; font-weight:600; color:var(--ivory); line-height:1}
+  .stat-card .l{font-size:11px; color:var(--taupe); text-transform:uppercase; letter-spacing:.08em; margin-top:6px}
+  .stat-card.accent-high .n{color:var(--risk-high-fg)}
+  .stat-card.accent-medium .n{color:var(--risk-medium-fg)}
+
+  .filters{display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; align-items:center}
+  .filters .group-label{font-size:11px; color:var(--taupe); text-transform:uppercase; letter-spacing:.08em; margin-right:2px}
+  .chip{
+    border:1px solid var(--hairline); background:transparent; color:var(--parchment);
+    padding:7px 14px; border-radius:999px; font-size:12.5px; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip:hover{border-color:var(--bronze); color:var(--ivory)}
+  .chip.active{
+    background:linear-gradient(135deg, var(--bronze), var(--walnut));
+    color:var(--ivory); border-color:transparent; font-weight:600;
+  }
+  .search-box{margin-bottom:20px}
+  .search-box input{max-width:340px}
+
+  .register{border-top:1px solid var(--hairline)}
+  .row{
+    display:grid; grid-template-columns:120px 90px 1fr 120px 140px 130px;
+    gap:14px; align-items:center; padding:16px 6px; border-bottom:1px solid var(--hairline-soft);
+    cursor:pointer; transition:background .12s ease;
+  }
+  .row:hover{background:rgba(199,80,0,.06)}
+  .row .qid{color:var(--bronze); font-size:12px; font-weight:600}
+  .module-badge{
+    font-size:10px; padding:3px 7px; border-radius:3px; text-align:center; font-weight:600;
+    text-transform:uppercase; letter-spacing:.03em; width:fit-content;
+  }
+  .module-badge.access_control{background:rgba(148,86,0,.18); color:var(--risk-medium-fg)}
+  .module-badge.sec_filing{background:rgba(199,80,0,.16); color:var(--risk-high-fg)}
+  .module-badge.vendor_risk{background:rgba(98,27,0,.28); color:var(--parchment)}
+  .row .q{font-size:13.5px; color:var(--ivory)}
+  .row .risk{font-size:11.5px; padding:4px 10px; border-radius:3px; text-align:center; width:fit-content; font-weight:600; letter-spacing:.02em; border:1px solid transparent}
+  .risk.high{background:var(--risk-high-bg); color:var(--risk-high-fg); border-color:var(--risk-high-line)}
+  .risk.medium{background:var(--risk-medium-bg); color:var(--risk-medium-fg); border-color:var(--risk-medium-line)}
+  .risk.low{background:var(--risk-low-bg); color:var(--risk-low-fg); border-color:var(--risk-low-line)}
+  .status{font-size:12px; color:var(--taupe); text-transform:capitalize}
+  .status.accepted{color:var(--accepted)}
+  .status.rejected{color:var(--rejected)}
+  .status.pending_review{color:var(--pending)}
+  .status.needs_more_evidence{color:var(--needs-more)}
+  @media (max-width:760px){.row{grid-template-columns:1fr; gap:4px}}
+
+  .empty{padding:48px 6px; color:var(--taupe); font-size:13.5px}
+  .empty .big{font-size:15px; color:var(--parchment); margin-bottom:6px}
+
+  .detail{
+    margin-top:28px; border:1px solid var(--hairline); background:var(--surface-2);
+    border-radius:6px; padding:26px 28px;
+    box-shadow:0 20px 60px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.03);
+  }
+  .detail-head{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
+  .detail h3{font-size:18px; margin-bottom:6px}
+  .detail .meta{font-size:12px; color:var(--taupe); margin-bottom:18px}
+  .source-badge{
+    font-size:10.5px; padding:4px 10px; border-radius:3px; font-weight:600; text-transform:uppercase;
+    letter-spacing:.04em; white-space:nowrap; height:fit-content;
+  }
+  .source-badge.template{background:rgba(199,80,0,.12); color:var(--parchment); border:1px solid var(--hairline)}
+  .source-badge.llm{background:rgba(217,162,75,.18); color:var(--accepted); border:1px solid rgba(217,162,75,.5)}
+  .detail .finding{
+    font-size:14.5px; margin-bottom:20px; padding:14px 16px; background:rgba(0,0,0,.25);
+    border-left:3px solid var(--bronze); border-radius:0 3px 3px 0; color:var(--ivory);
+  }
+  .evidence-item{
+    border:1px solid var(--hairline-soft); border-radius:3px; padding:11px 13px; margin-bottom:8px;
+    background:rgba(0,0,0,.2); font-size:13px; color:var(--parchment);
+  }
+  .evidence-item .src{font-size:11.5px; color:var(--bronze); margin-bottom:5px; font-weight:600}
+  .section-label{
+    font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--taupe);
+    margin:22px 0 10px; font-weight:600;
+  }
+  .review-log{font-size:12.5px; color:var(--parchment); margin-top:8px}
+  .review-log .who{color:var(--bronze); font-weight:600}
+  .audit-list{list-style:none; padding:0; margin:0; font-size:12.5px}
+  .audit-list li{padding:8px 0; border-bottom:1px dashed var(--hairline-soft); display:flex; justify-content:space-between; gap:12px; color:var(--parchment)}
+  .audit-list li:last-child{border-bottom:none}
+  .msg{font-size:12.5px; margin-top:10px; font-weight:500}
+  .msg.error{color:var(--rejected)}
+  .msg.ok{color:var(--accepted)}
+
+  /* Legend / glossary */
+  .legend{
+    margin-top:34px; padding-top:20px; border-top:1px solid var(--hairline-soft);
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px; font-size:12px; color:var(--taupe);
+  }
+  @media (max-width:760px){.legend{grid-template-columns:1fr}}
+  .legend h4{
+    font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--parchment); margin:0 0 8px; font-weight:600;
+  }
+  .legend dt{color:var(--bronze); font-weight:600; display:inline}
+  .legend dd{margin:0 0 6px; display:inline}
+  .legend .row-line{margin-bottom:5px}
+
+  footer{
+    margin-top:40px; padding-top:20px; border-top:1px solid var(--hairline-soft);
+    font-size:11.5px; color:var(--taupe); display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:10px;
+  }
+  footer .stack{display:flex; gap:8px; flex-wrap:wrap}
+  footer .pill{border:1px solid var(--hairline-soft); border-radius:999px; padding:3px 10px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="rail">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+        <rect x="1" y="1" width="30" height="30" rx="4" stroke="#C75000" stroke-width="1.5"/>
+        <path d="M9 22V11l7-4 7 4v11" stroke="#C75000" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M13 22v-6h6v6" stroke="#945600" stroke-width="1.5"/>
+      </svg>
+      <div>
+        <h1>Investigation <span class="accent">Register</span></h1>
+        <div class="kicker">Financial Compliance Copilot</div>
+      </div>
+    </div>
+
+    <div class="rail-section">
+      <div class="field">
+        <label>Acting as</label>
+        <select id="userSelect">
+          <option value="analyst1">analyst1 — analyst</option>
+          <option value="reviewer1">reviewer1 — reviewer</option>
+          <option value="manager1">manager1 — compliance manager</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="rail-section">
+      <label style="font-size:11px; color:var(--taupe); text-transform:uppercase; letter-spacing:.09em; font-weight:500; display:block; margin-bottom:8px">
+        New investigation
+      </label>
+
+      <div class="module-tabs" id="moduleTabs">
+        <div class="module-tab active" data-module="access_control">Access Control</div>
+        <div class="module-tab" data-module="sec_filing">SEC Filing</div>
+        <div class="module-tab" data-module="vendor_risk">Vendor Risk</div>
+      </div>
+
+      <div class="module-form active" id="form-access_control">
+        <div class="field">
+          <label>Question</label>
+          <textarea id="acQuestion" placeholder="e.g. Was the Q3 2025 privileged-access review completed and approved for CoreBanking?"></textarea>
+        </div>
+        <div class="field">
+          <label>Control ID</label>
+          <input id="acControl" value="AC-6">
+        </div>
+      </div>
+
+      <div class="module-form" id="form-sec_filing">
+        <div class="field">
+          <label>Ticker</label>
+          <select id="secTicker">
+            <option value="CRWD">CRWD — CrowdStrike (indexed)</option>
+            <option value="JPM">JPM — JPMorgan Chase</option>
+            <option value="WFC">WFC — Wells Fargo</option>
+            <option value="V">V — Visa</option>
+            <option value="MA">MA — Mastercard</option>
+            <option value="COIN">COIN — Coinbase</option>
+          </select>
+          <div class="hint">Only CRWD has indexed evidence today — others correctly abstain.</div>
+        </div>
+        <div class="field">
+          <label>Question (optional)</label>
+          <textarea id="secQuestion" placeholder="Defaults to: does this ticker disclose material cybersecurity incidents?"></textarea>
+        </div>
+      </div>
+
+      <div class="module-form" id="form-vendor_risk">
+        <div class="field">
+          <label>Vendor</label>
+          <select id="vendorName">
+            <option value="northstar_cloud">northstar_cloud (1 planted gap)</option>
+            <option value="apex_payments">apex_payments (3 planted gaps)</option>
+            <option value="redbridge_data">redbridge_data (14 planted gaps)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Question (optional)</label>
+          <textarea id="vendorQuestion" placeholder="Defaults to: what SCRM gaps exist for this vendor?"></textarea>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="submitBtn" style="width:100%">Run investigation</button>
+      <div class="msg" id="submitMsg"></div>
+    </div>
+
+    <div class="rail-section rail-note">
+      Findings are evidence-grounded and abstain (<code>insufficient evidence found</code>)
+      when nothing supports a claim. Every citation is checked against the
+      real chunk store before it reaches this queue —
+      see <code>backend/app/copilot/citation_guard.py</code>.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-head">
+      <h2>Findings queue</h2>
+      <span><span class="status-dot loading" id="connDot"></span><span class="conn-label" id="connLabel">connecting…</span></span>
+    </div>
+    <div class="subhead">Ledger of investigations awaiting or completing compliance review, across all three investigation modules.</div>
+
+    <div class="stats" id="stats">
+      <div class="stat-card"><div class="n" id="statTotal">—</div><div class="l">Total findings</div></div>
+      <div class="stat-card accent-high"><div class="n" id="statHigh">—</div><div class="l">High risk</div></div>
+      <div class="stat-card accent-medium"><div class="n" id="statPending">—</div><div class="l">Pending review</div></div>
+      <div class="stat-card"><div class="n" id="statAvg">—</div><div class="l">Avg. risk score</div></div>
+    </div>
+
+    <div class="filters" id="statusFilters">
+      <span class="group-label">Status</span>
+      <span class="chip active" data-status="">All</span>
+      <span class="chip" data-status="pending_review">Pending review</span>
+      <span class="chip" data-status="accepted">Accepted</span>
+      <span class="chip" data-status="rejected">Rejected</span>
+      <span class="chip" data-status="needs_more_evidence">Needs more evidence</span>
+    </div>
+    <div class="filters" id="riskFilters">
+      <span class="group-label">Risk</span>
+      <span class="chip active" data-risk="">All</span>
+      <span class="chip" data-risk="high">High</span>
+      <span class="chip" data-risk="medium">Medium</span>
+      <span class="chip" data-risk="low">Low</span>
+    </div>
+    <div class="filters" id="moduleFilters">
+      <span class="group-label">Module</span>
+      <span class="chip active" data-module="">All</span>
+      <span class="chip" data-module="access_control">Access Control</span>
+      <span class="chip" data-module="sec_filing">SEC Filing</span>
+      <span class="chip" data-module="vendor_risk">Vendor Risk</span>
+    </div>
+    <div class="search-box">
+      <input id="searchInput" placeholder="Search findings by control ID or text…">
+    </div>
+
+    <div class="register" id="register">
+      <div class="empty">Loading findings…</div>
+    </div>
+
+    <div id="detailContainer"></div>
+
+    <div class="legend">
+      <div>
+        <h4>Evidence status</h4>
+        <div class="row-line"><dt>complete</dt> <dd>— evidence found and satisfies the requirement</dd></div>
+        <div class="row-line"><dt>partial</dt> <dd>— evidence found but incomplete (e.g. missing approval)</dd></div>
+        <div class="row-line"><dt>missing</dt> <dd>— no evidence found for the period asked about</dd></div>
+        <div class="row-line"><dt>insufficient</dt> <dd>— system abstained rather than guess</dd></div>
+      </div>
+      <div>
+        <h4>Risk level</h4>
+        <div class="row-line"><dt>high</dt> <dd>— score ≥ 80, needs prompt attention</dd></div>
+        <div class="row-line"><dt>medium</dt> <dd>— score 50–79</dd></div>
+        <div class="row-line"><dt>low</dt> <dd>— score &lt; 50</dd></div>
+        <div class="row-line">Computed by fixed business rules, never by an LLM — see <code>risk_scoring.py</code>.</div>
+      </div>
+      <div>
+        <h4>Narrative source</h4>
+        <div class="row-line"><dt>template</dt> <dd>— citation-safe rule-based text (default)</dd></div>
+        <div class="row-line"><dt>llm</dt> <dd>— local Ollama model, still citation-checked</dd></div>
+        <div class="row-line">A finding's narrative is never trusted just because an LLM wrote it — every citation is validated first.</div>
+      </div>
+    </div>
+
+    <footer>
+      <div>Financial Compliance Investigation Copilot — educational prototype, not legal or audit advice.</div>
+      <div class="stack">
+        <span class="pill">FastAPI</span>
+        <span class="pill">BM25 + TF-IDF</span>
+        <span class="pill">SQLite</span>
+        <span class="pill">Zero paid APIs</span>
+      </div>
+    </footer>
+  </main>
+
+</div>
+
+<script>
+const API = (() => {
+  // Opened directly from disk (file://) or from a plain static server: talk
+  // to the API on localhost:8000, same as running it locally. Served BY the
+  // API itself (docker-compose, or uvicorn's /ui mount): use same-origin so
+  // one container/port is all that's needed and no CORS config matters.
+  if (window.location.protocol === 'file:') return 'http://localhost:8000';
+  if (window.location.pathname.startsWith('/ui')) return window.location.origin;
+  return 'http://localhost:8000';
+})();
+
+let currentStatus = "";
+let currentRisk = "";
+let currentModule = "";
+let currentSearch = "";
+let currentTab = "access_control";
+let findings = [];
+
+function currentUser(){ return document.getElementById('userSelect').value; }
+
+async function api(path, opts={}){
+  const res = await fetch(API + path, {
+    ...opts,
+    headers: { "Content-Type": "application/json", "X-User-Id": currentUser(), ...(opts.headers||{}) }
+  });
+  if(!res.ok){
+    const detail = await res.json().catch(()=>({detail: res.statusText}));
+    throw new Error(detail.detail || res.statusText);
+  }
+  return res.json();
+}
+
+function riskClass(level){ return level || 'low'; }
+
+// Derive which investigation module produced a finding from its control_id --
+// no separate "module" column on the backend needed for this.
+function moduleForControl(controlId){
+  if(!controlId) return 'access_control';
+  if(controlId === 'SEC-1C') return 'sec_filing';
+  if(controlId === 'SCRM-VENDOR') return 'vendor_risk';
+  return 'access_control';
+}
+const MODULE_LABELS = { access_control: 'Access Ctrl', sec_filing: 'SEC Filing', vendor_risk: 'Vendor Risk' };
+
+function setConnStatus(ok){
+  const dot = document.getElementById('connDot');
+  const label = document.getElementById('connLabel');
+  dot.className = 'status-dot ' + (ok ? 'ok' : 'err');
+  label.textContent = ok ? `connected · ${API}` : `unreachable · ${API}`;
+}
+
+function applyClientFilters(list){
+  return list.filter(f => {
+    if(currentModule && moduleForControl(f.control_id) !== currentModule) return false;
+    if(currentSearch){
+      const blob = `${f.control_id||''} ${f.finding_text||''}`.toLowerCase();
+      if(!blob.includes(currentSearch.toLowerCase())) return false;
+    }
+    return true;
+  });
+}
+
+function renderStats(list){
+  const total = list.length;
+  const high = list.filter(f => f.risk_level === 'high').length;
+  const pending = list.filter(f => f.status === 'pending_review').length;
+  const scores = list.map(f => f.risk_score).filter(s => typeof s === 'number');
+  const avg = scores.length ? (scores.reduce((a,b)=>a+b,0) / scores.length).toFixed(1) : '—';
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statHigh').textContent = high;
+  document.getElementById('statPending').textContent = pending;
+  document.getElementById('statAvg').textContent = avg;
+}
+
+function renderRegister(){
+  const el = document.getElementById('register');
+  const visible = applyClientFilters(findings);
+  renderStats(visible);
+
+  if(visible.length === 0){
+    el.innerHTML = `<div class="empty"><div class="big">No findings match these filters.</div>Run an investigation from the left panel, or widen the filters above.</div>`;
+    return;
+  }
+  el.innerHTML = visible.map(f => {
+    const mod = moduleForControl(f.control_id);
+    return `
+    <div class="row" data-id="${f.finding_id}">
+      <div class="qid mono">${f.control_id || '—'}</div>
+      <div class="module-badge ${mod}">${MODULE_LABELS[mod]}</div>
+      <div class="q">${escapeHtml(f.finding_text || '(no narrative)')}</div>
+      <div class="risk ${riskClass(f.risk_level)}">${f.risk_level || 'n/a'} · ${f.risk_score ?? '—'}</div>
+      <div class="status ${f.status}">${f.status.replace(/_/g,' ')}</div>
+      <div class="mono" style="font-size:11px;color:var(--taupe)">${f.evidence_status}</div>
+    </div>
+  `; }).join('');
+  el.querySelectorAll('.row').forEach(row => {
+    row.addEventListener('click', () => openDetail(row.dataset.id));
+  });
+}
+
+function escapeHtml(s){
+  return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+async function loadFindings(){
+  const params = new URLSearchParams();
+  if(currentStatus) params.set('status', currentStatus);
+  if(currentRisk) params.set('risk_level', currentRisk);
+  const qs = params.toString() ? `?${params.toString()}` : '';
+  findings = (await api('/findings' + qs)).findings;
+  setConnStatus(true);
+  renderRegister();
+}
+
+document.getElementById('statusFilters').addEventListener('click', (e) => {
+  if(!e.target.classList.contains('chip')) return;
+  document.querySelectorAll('#statusFilters .chip').forEach(c => c.classList.remove('active'));
+  e.target.classList.add('active');
+  currentStatus = e.target.dataset.status;
+  loadFindings();
+});
+document.getElementById('riskFilters').addEventListener('click', (e) => {
+  if(!e.target.classList.contains('chip')) return;
+  document.querySelectorAll('#riskFilters .chip').forEach(c => c.classList.remove('active'));
+  e.target.classList.add('active');
+  currentRisk = e.target.dataset.risk;
+  loadFindings();
+});
+document.getElementById('moduleFilters').addEventListener('click', (e) => {
+  if(!e.target.classList.contains('chip')) return;
+  document.querySelectorAll('#moduleFilters .chip').forEach(c => c.classList.remove('active'));
+  e.target.classList.add('active');
+  currentModule = e.target.dataset.module;
+  renderRegister();
+});
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  currentSearch = e.target.value.trim();
+  renderRegister();
+});
+
+document.getElementById('moduleTabs').addEventListener('click', (e) => {
+  if(!e.target.classList.contains('module-tab')) return;
+  document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.module-form').forEach(f => f.classList.remove('active'));
+  e.target.classList.add('active');
+  currentTab = e.target.dataset.module;
+  document.getElementById('form-' + currentTab).classList.add('active');
+  document.getElementById('submitMsg').textContent = '';
+});
+
+async function openDetail(findingId){
+  const f = await api(`/findings/${findingId}`);
+  const audit = await api(`/audit-log?investigation_id=${f.investigation_id}`);
+
+  const evidenceHtml = f.evidence.map(e => `
+    <div class="evidence-item">
+      <div class="src mono">${e.document_name} · ${e.chunk_id}</div>
+      ${escapeHtml(e.quote)}
+    </div>
+  `).join('') || '<div class="evidence-item">No supporting evidence.</div>';
+
+  const reviewsHtml = f.reviews.map(r => `
+    <div class="review-log"><span class="who">${r.reviewer} — ${r.decision}</span>${r.comment ? ': ' + escapeHtml(r.comment) : ''}</div>
+  `).join('');
+
+  const auditHtml = audit.events.map(e => `
+    <li><span>${e.event_type} — <span class="mono">${e.user_id}</span></span><span class="mono">${new Date(e.timestamp).toLocaleString()}</span></li>
+  `).join('');
+
+  const source = f.narrative_source || 'template';
+  const sourceBadge = `<span class="source-badge ${source.startsWith('llm') ? 'llm' : 'template'}">${source.replace(/-/g,' ')}</span>`;
+
+  document.getElementById('detailContainer').innerHTML = `
+    <div class="detail">
+      <div class="detail-head">
+        <div>
+          <h3>${f.control_id || 'Uncontrolled'} — ${f.risk_level || 'n/a'} risk (${f.risk_score ?? '—'})</h3>
+          <div class="meta mono">finding ${f.finding_id} · investigation ${f.investigation_id} · status: ${f.status}</div>
+        </div>
+        ${sourceBadge}
+      </div>
+      <div class="finding">${escapeHtml(f.finding_text)}</div>
+
+      <div class="section-label">Supporting evidence</div>
+      ${evidenceHtml}
+
+      <div class="section-label">Review decision</div>
+      <div class="btn-row">
+        <button class="btn-accept" onclick="review('${f.finding_id}','accept')">Accept</button>
+        <button class="btn-more" onclick="review('${f.finding_id}','request_evidence')">Request more evidence</button>
+        <button class="btn-reject" onclick="review('${f.finding_id}','reject')">Reject</button>
+      </div>
+      <div class="field" style="margin-top:10px">
+        <label>Comment</label>
+        <textarea id="reviewComment"></textarea>
+      </div>
+      ${reviewsHtml}
+      <div class="msg" id="reviewMsg"></div>
+
+      <div class="section-label">Audit trail</div>
+      <ul class="audit-list">${auditHtml}</ul>
+    </div>
+  `;
+  document.getElementById('detailContainer').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+async function review(findingId, decision){
+  const comment = document.getElementById('reviewComment').value;
+  const msg = document.getElementById('reviewMsg');
+  try{
+    await api(`/findings/${findingId}/review`, { method:'POST', body: JSON.stringify({decision, comment}) });
+    msg.className = 'msg ok';
+    msg.textContent = 'Review recorded.';
+    await loadFindings();
+    await openDetail(findingId);
+  }catch(err){
+    msg.className = 'msg error';
+    msg.textContent = err.message;
+  }
+}
+
+document.getElementById('submitBtn').addEventListener('click', async () => {
+  const msg = document.getElementById('submitMsg');
+  let endpoint, payload;
+
+  if(currentTab === 'access_control'){
+    const question = document.getElementById('acQuestion').value.trim();
+    const control_id = document.getElementById('acControl').value.trim() || 'AC-6';
+    if(!question){ msg.className='msg error'; msg.textContent='Enter a question first.'; return; }
+    endpoint = '/investigations';
+    payload = { question, control_id };
+  } else if(currentTab === 'sec_filing'){
+    const ticker = document.getElementById('secTicker').value;
+    const question = document.getElementById('secQuestion').value.trim();
+    endpoint = '/investigations/sec-filing';
+    payload = { ticker, ...(question ? { question } : {}) };
+  } else {
+    const vendor = document.getElementById('vendorName').value;
+    const question = document.getElementById('vendorQuestion').value.trim();
+    endpoint = '/investigations/vendor-risk';
+    payload = { vendor, ...(question ? { question } : {}) };
+  }
+
+  msg.className = 'msg'; msg.textContent = 'Running…';
+  try{
+    await api(endpoint, { method:'POST', body: JSON.stringify(payload) });
+    msg.className = 'msg ok';
+    msg.textContent = 'Investigation created — see queue below.';
+    if(currentTab === 'access_control') document.getElementById('acQuestion').value = '';
+    if(currentTab === 'sec_filing') document.getElementById('secQuestion').value = '';
+    if(currentTab === 'vendor_risk') document.getElementById('vendorQuestion').value = '';
+    await loadFindings();
+  }catch(err){
+    msg.className = 'msg error';
+    msg.textContent = err.message;
+  }
+});
+
+loadFindings().catch(err => {
+  setConnStatus(false);
+  document.getElementById('register').innerHTML =
+    `<div class="empty"><div class="big">Could not reach the API.</div>Is uvicorn running at ${API}? (${err.message})</div>`;
+});
+</script>
+</body>
+</html>

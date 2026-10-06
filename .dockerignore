@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.git/
+.gitignore
+data/db/*.db
+data/raw/sec_edgar/filings_html/*
+.pytest_cache/
+data/evaluation/results.json

@@ -1,0 +1,8 @@
+# Synthetic sample created solely for portfolio demonstration. This document contains no real company, client, employee, customer, vendor, financial, security, or confidential data.
+evidence_id,control_id,evidence_type,document_name,period_covered,owner,received_date,status
+EVD-001,AC-6,Privileged Access Review,q1_privileged_access_review.csv,2025-Q1,Identity Team,2025-03-30,Complete
+EVD-002,AC-6,Privileged Access Review,q2_privileged_access_review.csv,2025-Q2,Identity Team,2025-06-30,Complete
+EVD-003,AC-6,Privileged Access Review,q3_privileged_access_review.csv,2025-Q3,Identity Team,2025-09-30,Partial - missing manager approval
+EVD-004,AC-6,Privileged Access Review,q4_privileged_access_review.csv,2025-Q4,Identity Team,,Missing
+EVD-005,AC-2,Terminated Access Report,terminated_employee_access_report.csv,2025,Identity Team,2025-08-01,Complete (1 SLA exception noted)
+EVD-006,IA-2.1,MFA Enrollment Report,mfa_enrollment_report.csv,2025,Identity Team,2025-07-01,Complete (1 stale exception noted)
