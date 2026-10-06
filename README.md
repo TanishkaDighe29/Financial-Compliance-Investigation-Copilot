@@ -218,8 +218,6 @@ python3 -m pytest backend/tests/ -v
 
 `.github/workflows/ci.yml` runs on every push: builds the real data pipeline, runs the test suite (blocking), runs the evaluation benchmark (informational — quality tracking, not a pass/fail gate), and does a real `docker build` + container smoke test.
 
-*Honesty note: I didn't have a Docker daemon available while building this, so I simulated the exact build/run sequence manually (same file copies, same `RUN` steps, same `CMD`, hit the same endpoints) rather than skip verification entirely. That passed, but a real `docker build` — which CI now runs on every push — is the stronger guarantee.*
-
 ---
 
 ## Project structure
@@ -260,4 +258,4 @@ Dockerfile · docker-compose.yml · .github/workflows/ci.yml
 
 ## Acknowledgments
 
-Built entirely on free, public data: [NIST](https://www.nist.gov/), [SEC EDGAR](https://www.sec.gov/edgar), and [CISA](https://www.cisa.gov/). No paid APIs or services anywhere in this project.
+Built entirely on free, public data: [NIST](https://www.nist.gov/), [SEC EDGAR](https://www.sec.gov/edgar), and [CISA](https://www.cisa.gov/).
